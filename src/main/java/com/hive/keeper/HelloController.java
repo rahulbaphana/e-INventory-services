@@ -21,9 +21,9 @@ public class HelloController {
     }
 	
 	@RequestMapping(value = "/addItem", method = RequestMethod.POST)
-	public ResponseEntity<InventoryItem> addItem(@RequestBody InventoryItem inventoryItem) throws InventoryException {
-		InventoryItem item = new InventoryItem(inventoryItem.getName(), inventoryItem.getDescription(), inventoryItem.getQuantity(), Units.NONE);
+	public ResponseEntity<Inventory> addItem(@RequestBody InventoryItem inventoryItem) throws InventoryException {
+		InventoryItem item = new InventoryItem(inventoryItem.getName(), inventoryItem.getDescription(), inventoryItem.getQuantity(), inventoryItem.getUnits()!=null ? inventoryItem.getUnits() : Units.NONE);
 		inventory.addItem(item);
-		return new ResponseEntity<InventoryItem>(item, HttpStatus.OK);
+		return new ResponseEntity<Inventory>(inventory, HttpStatus.OK);
 	}
 }
